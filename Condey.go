@@ -3,7 +3,9 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math/rand"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -25,30 +27,22 @@ func main() {
 		for inner := 0; inner < amountPeople; inner++ {
 			scanner.Scan()
 			inputTemp := strings.Split(scanner.Text(), " ")
-			checkingString = strings.EqualFold(inputTemp[0], "<=")
+			checkingString = strings.EqualFold(inputTemp[0], "0xE2 0x89 0xA4")
 			if checkingString {
 				temperMax = inputTemp[1]
 			} else {
 				temperMinimum = inputTemp[1]
 			}
-			//
-			//	//if inputTemp[0] == "1" {
-			//	//	inputNum, _ := strconv.Atoi(inputTemp[1])
-			//	//	temperMax = inputNum
-			//	//} else {
-			//	//	inputNum, _ := strconv.Atoi(inputTemp[1])
-			//	//	temperMinimum = inputNum
-			//	//}
-			//	fmt.Println(inputTemp[1] + " " + inputTemp[0])
-			//	//	//if temperMinimum > temperMax {
-			//	//	//	fmt.Println("-1")
-			//	//	//} else if temperMinimum == temperMax {
-			//	//	//	fmt.Println(temperMinimum)
-			//	//	//} else {
-			//	//	//	number := RandomIntInRange(temperMinimum, temperMax)
-			//	//	//	fmt.Println(number)
-			//	//}
-			//
+			intMax, _ := strconv.Atoi(temperMax)
+			intMin, _ := strconv.Atoi(temperMinimum)
+			if intMin > intMax {
+				fmt.Println("-1")
+			} else if temperMinimum == temperMax {
+				fmt.Println(temperMinimum)
+			} else {
+				numberOutput := RandomIntInRange(intMin, intMax)
+				fmt.Println(numberOutput)
+			}
 			fmt.Println(temperMinimum + " " + temperMax)
 			fmt.Println(inputTemp[0] + " ")
 		}
@@ -59,15 +53,15 @@ func main() {
 	}
 }
 
-//func RandomIntInRange(min int, max int) int {
-//	number := rand.Intn(max) + min
-//
-//	if number > max {
-//		number = number - min
-//	}
-//	for i := number; i <= min; i++ {
-//		number = i
-//	}
-//
-//	return number
-//}
+func RandomIntInRange(min int, max int) int {
+	number := rand.Intn(max) + min
+
+	if number > max {
+		number = number - min
+	}
+	for i := number; i <= min; i++ {
+		number = i
+	}
+
+	return number
+}
