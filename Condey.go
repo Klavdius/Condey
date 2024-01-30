@@ -6,42 +6,53 @@ import (
 	"strings"
 )
 
+var band = []int{15, 30}
+
 func main() {
 	var (
-		amount         int
-		amountPeople   int
-		test           string
-		temperMinimum  string
-		temperMax      string
-		checkingString bool
+		amount       int
+		amountPeople int
+		inputChar    string
+		inputNumber  string
 	)
-	//
-	temperMinimum = "15"
-	temperMax = "30"
+
+	checkErrorBand := false
 	fmt.Scanln(&amount)
 	for i := 0; i < amount; i++ {
 		fmt.Scan(&amountPeople)
 		for inner := 0; inner < amountPeople; inner++ {
-			fmt.Scan(&test)
-			checkingString = strings.EqualFold(test, "<=")
-			fmt.Scan(&test)
-			if checkingString {
-				temperMax = test
-			} else {
-				temperMinimum = test
-			}
-			intMax, _ := strconv.Atoi(temperMax)
-			intMin, _ := strconv.Atoi(temperMinimum)
-			if intMin > intMax {
+			fmt.Scan(&inputChar)
+			checkChar := strings.EqualFold(inputChar, "<=")
+			fmt.Scan(&inputNumber)
+			if checkErrorBand {
 				fmt.Println("-1")
-			} else if temperMinimum == temperMax {
-				fmt.Println(temperMinimum)
 			} else {
-				fmt.Println(intMin)
+				checkErrorBand = CheckingNumberInBand(inputNumber)
+				if checkErrorBand {
+					fmt.Println("-1")
+				} else {
+					if checkChar {
+						band[1], _ = strconv.Atoi(inputNumber)
+					} else {
+						band[0], _ = strconv.Atoi(inputNumber)
+					}
+					fmt.Println(strconv.Itoa(band[0]))
+				}
 			}
 		}
-		temperMinimum = "15"
-		temperMax = "30"
-
+		band[0] = 15
+		band[1] = 30
+		checkErrorBand = false
 	}
+}
+
+func CheckingNumberInBand(inputText string) bool {
+	inputNumber, _ := strconv.Atoi(inputText)
+	var result bool
+	if inputNumber >= band[0] && inputNumber <= band[1] {
+		result = false
+	} else {
+		result = true
+	}
+	return result
 }
