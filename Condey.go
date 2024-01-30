@@ -27,7 +27,7 @@ func main() {
 		for inner := 0; inner < amountPeople; inner++ {
 			scanner.Scan()
 			inputTemp := strings.Split(scanner.Text(), " ")
-			checkingString = strings.EqualFold(inputTemp[0], "0xE2 0x89 0xA4")
+			checkingString = strings.EqualFold(inputTemp[0], "≤")
 			if checkingString {
 				temperMax = inputTemp[1]
 			} else {
@@ -43,10 +43,7 @@ func main() {
 				numberOutput := RandomIntInRange(intMin, intMax)
 				fmt.Println(numberOutput)
 			}
-			fmt.Println(temperMinimum + " " + temperMax)
-			fmt.Println(inputTemp[0] + " ")
 		}
-		fmt.Println(temperMinimum + " " + temperMax)
 		temperMinimum = "15"
 		temperMax = "30"
 
