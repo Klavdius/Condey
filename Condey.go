@@ -23,7 +23,7 @@ func main() {
 		fmt.Scan(&amountPeople)
 		for inner := 0; inner < amountPeople; inner++ {
 			fmt.Scan(&test)
-			checkingString = strings.EqualFold(test, "≤")
+			checkingString = strings.EqualFold(test, "<=")
 			fmt.Scan(&test)
 			if checkingString {
 				temperMax = test
