@@ -27,14 +27,19 @@ func main() {
 			if checkErrorBand {
 				fmt.Println("-1")
 			} else {
-				checkErrorBand = CheckingNumberInBand(inputNumber)
+				if checkChar {
+					checkErrorBand = CheckingNumberNoMoreMax(inputNumber)
+				} else {
+					checkErrorBand = CheckingNumberNoLessMin(inputNumber)
+				}
+
 				if checkErrorBand {
 					fmt.Println("-1")
 				} else {
 					if checkChar {
-						band[1], _ = strconv.Atoi(inputNumber)
+						ChangingRadiusBoundariesMax(inputNumber)
 					} else {
-						band[0], _ = strconv.Atoi(inputNumber)
+						ChangingRadiusBoundariesMin(inputNumber)
 					}
 					fmt.Println(strconv.Itoa(band[0]))
 				}
@@ -46,13 +51,38 @@ func main() {
 	}
 }
 
-func CheckingNumberInBand(inputText string) bool {
+func CheckingNumberNoMoreMax(inputText string) bool {
 	inputNumber, _ := strconv.Atoi(inputText)
 	var result bool
-	if inputNumber >= band[0] && inputNumber <= band[1] {
-		result = false
-	} else {
+	if inputNumber < band[0] {
 		result = true
+	} else {
+		result = false
 	}
 	return result
+}
+
+func CheckingNumberNoLessMin(inputText string) bool {
+	inputNumber, _ := strconv.Atoi(inputText)
+	var result bool
+	if inputNumber > band[1] {
+		result = true
+	} else {
+		result = false
+	}
+	return result
+}
+
+func ChangingRadiusBoundariesMax(input string) {
+	limit, _ := strconv.Atoi(input)
+	if limit < band[1] {
+		band[1] = limit
+	}
+}
+
+func ChangingRadiusBoundariesMin(input string) {
+	limit, _ := strconv.Atoi(input)
+	if limit > band[0] {
+		band[0] = limit
+	}
 }
